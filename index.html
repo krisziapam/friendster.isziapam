@@ -3,920 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Friendster UI Concept</title>
+  <title>Friendster Classic UI</title>
   <style>
-    :root {
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --accent: #f59e0b;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --success: #10b981;
-      --shadow: 0 12px 30px rgba(37, 99, 235, 0.08);
-      --radius: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f0f0f0;
+      color: #000;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar-inner {
-      max-width: 1320px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      gap: 16px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--primary), #60a5fa);
-      color: white;
-      font-weight: 900;
-      box-shadow: var(--shadow);
-    }
-
-    .searchbar {
-      flex: 1;
-      max-width: 520px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #eef4ff;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid #dbeafe;
-    }
-
-    .searchbar input {
-      border: none;
-      outline: none;
-      background: transparent;
-      width: 100%;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .icon-btn,
-    .avatar-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
+    .container {
+      width: 900px;
+      margin: 20px auto;
       background: white;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: 0.2s ease;
+      border: 2px solid #ccc;
     }
 
-    .icon-btn:hover,
-    .avatar-btn:hover,
-    .menu a:hover,
-    .post-action:hover,
-    .friend-action:hover,
-    .story:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .avatar-btn {
-      background: linear-gradient(135deg, #fde68a, #f59e0b);
+    .header {
+      background: #003399;
       color: white;
-      font-weight: 700;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: bold;
     }
 
     .layout {
-      max-width: 1320px;
-      margin: 24px auto;
-      padding: 0 24px 32px;
-      display: grid;
-      grid-template-columns: 280px minmax(0, 1fr) 320px;
-      gap: 24px;
-    }
-
-    .panel,
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .sidebar,
-    .rightbar {
       display: flex;
-      flex-direction: column;
-      gap: 18px;
     }
 
-    .profile-card {
-      overflow: hidden;
+    .sidebar {
+      width: 250px;
+      border-right: 1px solid #ccc;
+      padding: 10px;
     }
 
-    .cover {
-      height: 110px;
-      background: linear-gradient(135deg, #2563eb, #7c3aed, #f59e0b);
+    .profile-pic {
+      width: 100%;
+      border: 2px solid #000;
     }
 
-    .profile-body {
-      padding: 0 20px 20px;
-      margin-top: -34px;
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
     }
 
-    .profile-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
-      border: 4px solid white;
-      background: linear-gradient(135deg, #60a5fa, #2563eb);
+    .section {
+      margin-top: 15px;
+    }
+
+    .section h3 {
+      background: #003399;
       color: white;
-      display: grid;
-      place-items: center;
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .profile-name {
-      font-size: 1.1rem;
-      font-weight: 800;
-    }
-
-    .profile-meta {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 4px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .stat {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      padding: 12px;
-      border-radius: 14px;
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1rem;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .menu {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .menu a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      color: var(--text);
-      transition: 0.2s ease;
-    }
-
-    .menu a.active {
-      background: #eef4ff;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .menu-badge {
-      margin-left: auto;
-      background: var(--primary);
-      color: white;
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border-radius: 999px;
+      padding: 5px;
+      font-size: 14px;
     }
 
     .main {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .stories {
-      padding: 18px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
-    .section-header h3 {
-      font-size: 1rem;
-    }
-
-    .section-header a {
-      color: var(--primary);
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .story-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .story {
-      min-height: 160px;
-      border-radius: 20px;
-      padding: 14px;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .story:nth-child(1) { background: linear-gradient(135deg, #2563eb, #60a5fa); }
-    .story:nth-child(2) { background: linear-gradient(135deg, #7c3aed, #c084fc); }
-    .story:nth-child(3) { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
-    .story:nth-child(4) { background: linear-gradient(135deg, #10b981, #34d399); }
-
-    .story-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.25);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      border: 1px solid rgba(255,255,255,0.35);
-    }
-
-    .composer {
-      padding: 18px;
-    }
-
-    .composer-top {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .composer textarea {
       flex: 1;
-      min-height: 88px;
-      resize: none;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
-      font-size: 0.95rem;
-      outline: none;
-      background: #f8fafc;
+      padding: 10px;
     }
 
-    .composer-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-      gap: 12px;
-      flex-wrap: wrap;
+    .box {
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
     }
 
-    .composer-tools {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      background: #eff6ff;
-      color: var(--primary);
-      border: 1px solid #dbeafe;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .post-btn {
-      background: var(--primary);
+    .box-header {
+      background: #003399;
       color: white;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 20px;
-      font-weight: 700;
-      cursor: pointer;
+      padding: 5px;
+      font-weight: bold;
+      font-size: 14px;
     }
 
-    .post-btn:hover {
-      background: var(--primary-dark);
+    .box-content {
+      padding: 10px;
+      font-size: 13px;
     }
 
-    .feed-card {
-      padding: 20px;
-    }
-
-    .post-header {
+    .friend {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .post-user {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .mini-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      color: white;
-      font-weight: 800;
-      background: linear-gradient(135deg, #2563eb, #60a5fa);
-    }
-
-    .mini-avatar.alt {
-      background: linear-gradient(135deg, #7c3aed, #c084fc);
-    }
-
-    .post-user h4 {
-      font-size: 1rem;
-    }
-
-    .post-user p,
-    .muted {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .post-text {
-      margin-bottom: 16px;
-      font-size: 0.96rem;
-    }
-
-    .post-media {
-      border-radius: 18px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      min-height: 260px;
-      border: 1px solid var(--border);
-      background: #f8fafc;
-      margin-bottom: 16px;
-    }
-
-    .post-media-left,
-    .post-media-right > div {
-      display: flex;
-      align-items: end;
-      padding: 18px;
-      color: white;
-      font-weight: 700;
-    }
-
-    .post-media-left {
-      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-      font-size: 1.3rem;
-    }
-
-    .post-media-right {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-    }
-
-    .post-media-right > div:first-child {
-      background: linear-gradient(135deg, #f59e0b, #fbbf24);
-    }
-
-    .post-media-right > div:last-child {
-      background: linear-gradient(135deg, #10b981, #34d399);
-    }
-
-    .post-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-    }
-
-    .reactions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .reaction-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--success);
-    }
-
-    .post-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .post-action,
-    .friend-action {
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: white;
-      cursor: pointer;
-      transition: 0.2s ease;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .widget {
-      padding: 18px;
-    }
-
-    .friend-list,
-    .event-list,
-    .trend-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .friend-item,
-    .event-item,
-    .trend-item {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .friend-avatar,
-    .event-icon,
-    .trend-rank {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .friend-avatar:nth-child(1), .event-icon, .trend-rank { background: linear-gradient(135deg, #2563eb, #60a5fa); }
-
-    .friend-meta,
-    .event-meta,
-    .trend-meta {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .friend-meta h4,
-    .event-meta h4,
-    .trend-meta h4 {
-      font-size: 0.95rem;
-      margin-bottom: 2px;
-    }
-
-    .friend-meta p,
-    .event-meta p,
-    .trend-meta p {
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .friend-action.primary {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .promo {
-      padding: 20px;
-      background: linear-gradient(135deg, #1d4ed8, #7c3aed);
-      color: white;
-    }
-
-    .promo h3 {
       margin-bottom: 8px;
-      font-size: 1.1rem;
     }
 
-    .promo p {
-      opacity: 0.9;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
+    .friend img {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+      border: 1px solid #000;
     }
 
-    .promo button {
-      background: white;
-      color: var(--primary);
-      border: none;
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    @media (max-width: 1120px) {
-      .layout {
-        grid-template-columns: 240px minmax(0, 1fr);
-      }
-
-      .rightbar {
-        display: none;
-      }
-
-      .story-row {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 760px) {
-      .topbar-inner {
-        flex-wrap: wrap;
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        order: 2;
-      }
-
-      .main {
-        order: 1;
-      }
-
-      .story-row {
-        grid-template-columns: 1fr;
-      }
-
-      .post-media {
-        grid-template-columns: 1fr;
-      }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background: #f9f9f9;
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <div class="brand-logo">F</div>
-        <span>Friendster</span>
-      </div>
 
-      <div class="searchbar">
-        <span>🔎</span>
-        <input type="text" placeholder="Search friends, communities, photos, memories..." />
-      </div>
-
-      <div class="top-actions">
-        <button class="icon-btn">💬</button>
-        <button class="icon-btn">🔔</button>
-        <button class="icon-btn">➕</button>
-        <button class="avatar-btn">JS</button>
-      </div>
-    </div>
-  </header>
+<div class="container">
+  <div class="header">Friendster</div>
 
   <div class="layout">
-    <aside class="sidebar">
-      <div class="panel profile-card">
-        <div class="cover"></div>
-        <div class="profile-body">
-          <div class="profile-avatar">JS</div>
-          <div class="profile-name">Jamie Santos</div>
-          <div class="profile-meta">Product Designer · Manila, Philippines</div>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <img class="profile-pic" src="https://i.pinimg.com/736x/5a/6e/2d/5a6e2d2b6c6c0e0d9b1d4c2c8b0c3a9d.jpg" alt="emo profile" />
+      <div class="name">Iszia Pamintuan</div>
 
-          <div class="stats">
-            <div class="stat">
-              <strong>1.2k</strong>
-              <span>Friends</span>
-            </div>
-            <div class="stat">
-              <strong>84</strong>
-              <span>Groups</span>
-            </div>
-            <div class="stat">
-              <strong>319</strong>
-              <span>Photos</span>
-            </div>
+      <div class="section">
+        <h3>Basic Info</h3>
+        <p>Age: 17</p>
+        <p>Status: Single</p>
+        <p>Location: Philippines</p>
+      </div>
+
+      <div class="section">
+        <h3>Interests</h3>
+        <p>Music: Emo, Rock</p>
+        <p>Movies: Drama</p>
+        <p>Hobbies: Writing, Listening to music</p>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <div class="box">
+        <div class="box-header">About Me</div>
+        <div class="box-content">
+          "I write what I feel. I feel what I can't say."<br><br>
+          Living in my own world, headphones on, ignoring reality.
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-header">Testimonials</div>
+        <div class="box-content">
+          <p><b>Ana:</b> Super kind and deep person 💔</p>
+          <p><b>Mark:</b> Always listening to sad songs lol</p>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-header">Friends</div>
+        <div class="box-content">
+          <div class="friend">
+            <img src="https://i.pravatar.cc/40?img=1" />
+            <span>Ana</span>
+          </div>
+          <div class="friend">
+            <img src="https://i.pravatar.cc/40?img=2" />
+            <span>Marco</span>
+          </div>
+          <div class="friend">
+            <img src="https://i.pravatar.cc/40?img=3" />
+            <span>Tina</span>
           </div>
         </div>
       </div>
 
-      <nav class="panel menu">
-        <a href="#" class="active">🏠 Home</a>
-        <a href="#">👤 Profile</a>
-        <a href="#">👥 Friends <span class="menu-badge">12</span></a>
-        <a href="#">💬 Messages</a>
-        <a href="#">📸 Photos</a>
-        <a href="#">🌍 Communities</a>
-        <a href="#">🎵 Music & Interests</a>
-        <a href="#">⚙️ Settings</a>
-      </nav>
-
-      <div class="panel widget">
-        <div class="section-header">
-          <h3>Quick Links</h3>
-        </div>
-        <div class="trend-list">
-          <div class="trend-item">
-            <div class="trend-rank">1</div>
-            <div class="trend-meta">
-              <h4>Profile Visitors</h4>
-              <p>See who viewed your page today.</p>
-            </div>
-          </div>
-          <div class="trend-item">
-            <div class="trend-rank">2</div>
-            <div class="trend-meta">
-              <h4>Memory Feed</h4>
-              <p>Highlights from past posts and photos.</p>
-            </div>
-          </div>
-          <div class="trend-item">
-            <div class="trend-rank">3</div>
-            <div class="trend-meta">
-              <h4>Friend Suggestions</h4>
-              <p>Reconnect with classmates and coworkers.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <main class="main">
-      <section class="card stories">
-        <div class="section-header">
-          <h3>Stories</h3>
-          <a href="#">View all</a>
-        </div>
-        <div class="story-row">
-          <div class="story">
-            <div class="story-avatar">AN</div>
-            <div>
-              <strong>Ana Rivera</strong>
-              <p>Weekend café hopping</p>
-            </div>
-          </div>
-          <div class="story">
-            <div class="story-avatar">MK</div>
-            <div>
-              <strong>Marco Kim</strong>
-              <p>Throwback school reunion</p>
-            </div>
-          </div>
-          <div class="story">
-            <div class="story-avatar">TL</div>
-            <div>
-              <strong>Tina Lee</strong>
-              <p>Beach snaps from Cebu</p>
-            </div>
-          </div>
-          <div class="story">
-            <div class="story-avatar">JR</div>
-            <div>
-              <strong>Josh Reyes</strong>
-              <p>New playlist drops tonight</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card composer">
-        <div class="composer-top">
-          <div class="mini-avatar">JS</div>
-          <textarea placeholder="Share an update with your friends..."></textarea>
-        </div>
-        <div class="composer-actions">
-          <div class="composer-tools">
-            <div class="pill">📷 Photo</div>
-            <div class="pill">🎬 Video</div>
-            <div class="pill">📍 Check in</div>
-            <div class="pill">😊 Feeling</div>
-          </div>
-          <button class="post-btn">Post Update</button>
-        </div>
-      </section>
-
-      <article class="card feed-card">
-        <div class="post-header">
-          <div class="post-user">
-            <div class="mini-avatar alt">AR</div>
-            <div>
-              <h4>Ana Rivera</h4>
-              <p>2 hours ago · Public</p>
-            </div>
-          </div>
-          <div class="muted">•••</div>
-        </div>
-
-        <div class="post-text">
-          Just finished redesigning my profile page concept. I wanted something that feels nostalgic like classic social networking, but cleaner and more modern for today’s users. ✨
-        </div>
-
-        <div class="post-media">
-          <div class="post-media-left">Modern Friendster Profile Concept</div>
-          <div class="post-media-right">
-            <div>Community Spaces</div>
-            <div>Memory Highlights</div>
-          </div>
-        </div>
-
-        <div class="post-footer">
-          <div class="reactions">
-            <div class="reaction-dot"></div>
-            <span>268 reactions · 41 comments</span>
-          </div>
-          <div class="post-actions">
-            <button class="post-action">👍 Like</button>
-            <button class="post-action">💬 Comment</button>
-            <button class="post-action">↗ Share</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="card feed-card">
-        <div class="post-header">
-          <div class="post-user">
-            <div class="mini-avatar">MK</div>
-            <div>
-              <h4>Marco Kim</h4>
-              <p>Yesterday · Friends only</p>
-            </div>
-          </div>
-          <div class="muted">•••</div>
-        </div>
-
-        <div class="post-text">
-          Missing the old days of testimonials, top friends, and custom profile themes. A refreshed Friendster comeback could bring all of that back with better privacy and mobile-first design.
-        </div>
-
-        <div class="post-footer">
-          <div class="reactions">
-            <div class="reaction-dot"></div>
-            <span>143 reactions · 18 comments</span>
-          </div>
-          <div class="post-actions">
-            <button class="post-action">👍 Like</button>
-            <button class="post-action">💬 Comment</button>
-            <button class="post-action">🔖 Save</button>
-          </div>
-        </div>
-      </article>
-    </main>
-
-    <aside class="rightbar">
-      <div class="panel widget">
-        <div class="section-header">
-          <h3>Friend Requests</h3>
-          <a href="#">See all</a>
-        </div>
-        <div class="friend-list">
-          <div class="friend-item">
-            <div class="friend-avatar" style="background: linear-gradient(135deg, #2563eb, #60a5fa);">DL</div>
-            <div class="friend-meta">
-              <h4>Diane Lopez</h4>
-              <p>12 mutual friends</p>
-            </div>
-            <button class="friend-action primary">Add</button>
-          </div>
-          <div class="friend-item">
-            <div class="friend-avatar" style="background: linear-gradient(135deg, #7c3aed, #c084fc);">PT</div>
-            <div class="friend-meta">
-              <h4>Paolo Tan</h4>
-              <p>Works at Pixel House</p>
-            </div>
-            <button class="friend-action">View</button>
-          </div>
-          <div class="friend-item">
-            <div class="friend-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">NC</div>
-            <div class="friend-meta">
-              <h4>Nina Cruz</h4>
-              <p>From your university network</p>
-            </div>
-            <button class="friend-action primary">Add</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel widget">
-        <div class="section-header">
-          <h3>Upcoming Events</h3>
-          <a href="#">Create</a>
-        </div>
-        <div class="event-list">
-          <div class="event-item">
-            <div class="event-icon">🎉</div>
-            <div class="event-meta">
-              <h4>Retro Social Night</h4>
-              <p>Apr 18 · 7:00 PM · Makati</p>
-            </div>
-          </div>
-          <div class="event-item">
-            <div class="event-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">🎵</div>
-            <div class="event-meta">
-              <h4>Indie Playlist Meetup</h4>
-              <p>Apr 21 · 6:30 PM · BGC</p>
-            </div>
-          </div>
-          <div class="event-item">
-            <div class="event-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">📸</div>
-            <div class="event-meta">
-              <h4>Photo Walk Community</h4>
-              <p>Apr 24 · 8:00 AM · Intramuros</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel promo">
-        <h3>Bring back testimonials</h3>
-        <p>A playful concept block for a modern Friendster reboot: social proof, nostalgia, and community-first design.</p>
-        <button>Explore Concept</button>
-      </div>
-    </aside>
+    </div>
   </div>
+
+  <div class="footer">© 2005 Friendster Clone UI</div>
+</div>
+
 </body>
 </html>
