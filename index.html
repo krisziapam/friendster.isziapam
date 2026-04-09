@@ -95,7 +95,9 @@ body {
 <div class="box">
 <h3>Profile</h3>
 <div class="box-content">
-<img class="profile-pic" src="https://i.pinimg.com/736x/5a/6e/2d/5a6e2d2b6c6c0e0d9b1d4c2c8b0c3a9d.jpg">
+<img class="profile-pic" id="profilePreview" src="data:image/png;base64,REPLACE_BASE64">
+<br><br>
+<input type="file" id="profileUpload" accept="image/*">
 <br><br>
 <b>Name:</b> Iszia Pamintuan<br>
 <b>Status:</b> Single 💔<br>
@@ -155,5 +157,17 @@ Fall Out Boy<br>
 
 </div>
 
+<script>
+document.getElementById('profileUpload').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('profilePreview').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
 </body>
 </html>
