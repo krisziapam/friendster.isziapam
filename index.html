@@ -1,176 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Friendster Classic UI</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f0f0f0;
-      color: #000;
-    }
+<title>Friendster Profile - Iszia Pamintuan</title>
+<style>
+body {
+  background: hotpink;
+  font-family: Verdana;
+}
 
-    .container {
-      width: 900px;
-      margin: 20px auto;
-      background: white;
-      border: 2px solid #ccc;
-    }
+.container {
+  width: 900px;
+  margin: auto;
+  background: black;
+  border: 5px solid deeppink;
+  color: white;
+}
 
-    .header {
-      background: #003399;
-      color: white;
-      padding: 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.header {
+  background: deeppink;
+  padding: 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
 
-    .layout {
-      display: flex;
-    }
+.layout {
+  display: flex;
+}
 
-    .sidebar {
-      width: 250px;
-      border-right: 1px solid #ccc;
-      padding: 10px;
-    }
+.left {
+  width: 60%;
+  padding: 10px;
+}
 
-    .profile-pic {
-      width: 100%;
-      border: 2px solid #000;
-    }
+.right {
+  width: 40%;
+  padding: 10px;
+}
 
-    .name {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+.box {
+  border: 2px dotted pink;
+  margin-bottom: 15px;
+}
 
-    .section {
-      margin-top: 15px;
-    }
+.box h3 {
+  background: deeppink;
+  margin: 0;
+  padding: 5px;
+  font-size: 14px;
+}
 
-    .section h3 {
-      background: #003399;
-      color: white;
-      padding: 5px;
-      font-size: 14px;
-    }
+.box-content {
+  padding: 10px;
+  font-size: 12px;
+}
 
-    .main {
-      flex: 1;
-      padding: 10px;
-    }
+.profile-pic {
+  width: 150px;
+  border: 3px solid pink;
+}
 
-    .box {
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
-    }
+.friend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
 
-    .box-header {
-      background: #003399;
-      color: white;
-      padding: 5px;
-      font-weight: bold;
-      font-size: 14px;
-    }
+.friend-grid img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid pink;
+}
 
-    .box-content {
-      padding: 10px;
-      font-size: 13px;
-    }
+.marquee {
+  background: black;
+  color: pink;
+  padding: 5px;
+  font-size: 12px;
+}
 
-    .friend {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .friend img {
-      width: 40px;
-      height: 40px;
-      margin-right: 8px;
-      border: 1px solid #000;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 12px;
-      padding: 10px;
-      border-top: 1px solid #ccc;
-      background: #f9f9f9;
-    }
-  </style>
+</style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">Friendster</div>
 
-  <div class="layout">
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-      <img class="profile-pic" src="https://i.pinimg.com/736x/5a/6e/2d/5a6e2d2b6c6c0e0d9b1d4c2c8b0c3a9d.jpg" alt="emo profile" />
-      <div class="name">Iszia Pamintuan</div>
+<div class="header">☺ friendster</div>
 
-      <div class="section">
-        <h3>Basic Info</h3>
-        <p>Age: 17</p>
-        <p>Status: Single</p>
-        <p>Location: Philippines</p>
-      </div>
+<div class="marquee"><marquee>♥ welcome to my profile ♥ emo forever ♥ broken but beautiful ♥</marquee></div>
 
-      <div class="section">
-        <h3>Interests</h3>
-        <p>Music: Emo, Rock</p>
-        <p>Movies: Drama</p>
-        <p>Hobbies: Writing, Listening to music</p>
-      </div>
-    </div>
+<div class="layout">
 
-    <!-- MAIN -->
-    <div class="main">
+<div class="left">
 
-      <div class="box">
-        <div class="box-header">About Me</div>
-        <div class="box-content">
-          "I write what I feel. I feel what I can't say."<br><br>
-          Living in my own world, headphones on, ignoring reality.
-        </div>
-      </div>
+<div class="box">
+<h3>Profile</h3>
+<div class="box-content">
+<img class="profile-pic" src="https://i.pinimg.com/736x/5a/6e/2d/5a6e2d2b6c6c0e0d9b1d4c2c8b0c3a9d.jpg">
+<br><br>
+<b>Name:</b> Iszia Pamintuan<br>
+<b>Status:</b> Single 💔<br>
+<b>Location:</b> Philippines<br>
+</div>
+</div>
 
-      <div class="box">
-        <div class="box-header">Testimonials</div>
-        <div class="box-content">
-          <p><b>Ana:</b> Super kind and deep person 💔</p>
-          <p><b>Mark:</b> Always listening to sad songs lol</p>
-        </div>
-      </div>
+<div class="box">
+<h3>About Me</h3>
+<div class="box-content">
+"I cry in silence, I smile in public."<br><br>
+Music is my escape. Reality hurts.
+</div>
+</div>
 
-      <div class="box">
-        <div class="box-header">Friends</div>
-        <div class="box-content">
-          <div class="friend">
-            <img src="https://i.pravatar.cc/40?img=1" />
-            <span>Ana</span>
-          </div>
-          <div class="friend">
-            <img src="https://i.pravatar.cc/40?img=2" />
-            <span>Marco</span>
-          </div>
-          <div class="friend">
-            <img src="https://i.pravatar.cc/40?img=3" />
-            <span>Tina</span>
-          </div>
-        </div>
-      </div>
+<div class="box">
+<h3>Testimonials</h3>
+<div class="box-content">
+<b>Ana:</b> She's soft but strong 💔<br>
+<b>Josh:</b> Always emo but cool 😎
+</div>
+</div>
 
-    </div>
-  </div>
+</div>
 
-  <div class="footer">© 2005 Friendster Clone UI</div>
+<div class="right">
+
+<div class="box">
+<h3>Top Friends</h3>
+<div class="box-content friend-grid">
+<img src="https://i.pravatar.cc/80?img=1">
+<img src="https://i.pravatar.cc/80?img=2">
+<img src="https://i.pravatar.cc/80?img=3">
+<img src="https://i.pravatar.cc/80?img=4">
+<img src="https://i.pravatar.cc/80?img=5">
+<img src="https://i.pravatar.cc/80?img=6">
+</div>
+</div>
+
+<div class="box">
+<h3>Favorite Music</h3>
+<div class="box-content">
+My Chemical Romance<br>
+Paramore<br>
+Fall Out Boy<br>
+
+<br>
+<audio controls autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </body>
