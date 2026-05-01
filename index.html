@@ -1,173 +1,453 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Friendster Profile - Iszia Pamintuan</title>
-<style>
-body {
-  background: hotpink;
-  font-family: Verdana;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Friendster Profile Replica</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.container {
-  width: 900px;
-  margin: auto;
-  background: black;
-  border: 5px solid deeppink;
-  color: white;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(255, 97, 165, 0.3), transparent 35%),
+        #050505;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      color: #ff89bb;
+      display: flex;
+      justify-content: center;
+      padding: 18px 10px;
+    }
 
-.header {
-  background: deeppink;
-  padding: 20px;
-  font-size: 40px;
-  font-weight: bold;
-}
+    .page {
+      width: 760px;
+      background: #b4144b;
+      border: 4px solid #ff7caf;
+      outline: 2px solid #111;
+      box-shadow: 0 0 0 2px #5c0024, 0 0 25px rgba(255, 20, 110, 0.6);
+      padding: 14px;
+      position: relative;
+    }
 
-.layout {
-  display: flex;
-}
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px dotted rgba(255, 180, 210, 0.35);
+      pointer-events: none;
+    }
 
-.left {
-  width: 60%;
-  padding: 10px;
-}
+    .top-strip {
+      height: 18px;
+      background: #030303;
+      border: 1px solid #dd3f7f;
+      margin-bottom: 10px;
+    }
 
-.right {
-  width: 40%;
-  padding: 10px;
-}
+    header {
+      background: #c21752;
+      border: 1px solid #d84480;
+      padding: 12px 22px 18px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.box {
-  border: 2px dotted pink;
-  margin-bottom: 15px;
-}
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 90px 34px;
+      opacity: .45;
+    }
 
-.box h3 {
-  background: deeppink;
-  margin: 0;
-  padding: 5px;
-  font-size: 14px;
-}
+    .logo {
+      position: relative;
+      z-index: 1;
+      color: #171717;
+      font-size: 62px;
+      line-height: .9;
+      font-weight: 700;
+      letter-spacing: -3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.box-content {
-  padding: 10px;
-  font-size: 12px;
-}
+    .smiley {
+      width: 62px;
+      height: 62px;
+      border: 5px solid #1d1d1d;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 400;
+    }
 
-.profile-pic {
-  width: 150px;
-  border: 3px solid pink;
-}
+    .nav {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 8px;
+    }
 
-.friend-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-}
+    .nav div {
+      height: 24px;
+      background: #030303;
+      border: 1px solid #ff4d94;
+    }
 
-.friend-grid img {
-  width: 80px;
-  height: 80px;
-  border: 2px solid pink;
-}
+    .main {
+      display: grid;
+      grid-template-columns: 1.65fr .95fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
 
-.marquee {
-  background: black;
-  color: pink;
-  padding: 5px;
-  font-size: 12px;
-}
+    .box {
+      background: #050505;
+      border: 2px solid #ff5b9b;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 0 1px #5a0827;
+    }
 
-</style>
+    .bar {
+      height: 25px;
+      background: linear-gradient(#e33075, #b50d49);
+      border-bottom: 2px solid #ff8bbc;
+      color: #ffd4e5;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      text-transform: lowercase;
+    }
+
+    .profile-top {
+      display: grid;
+      grid-template-columns: 165px 1fr;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .photo {
+      width: 150px;
+      height: 180px;
+      background:
+        linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=70") center/cover;
+      border: 4px solid #222;
+      outline: 1px solid #ff5b9b;
+      box-shadow: 0 0 12px rgba(255, 70, 140, .5);
+    }
+
+    .left-menu {
+      margin-top: 10px;
+      border-top: 1px solid #701336;
+    }
+
+    .left-menu a {
+      display: block;
+      color: #ff77aa;
+      text-decoration: none;
+      font-size: 10px;
+      padding: 5px 3px;
+      border-bottom: 1px solid #5d0a2a;
+    }
+
+    .details h1 {
+      margin: 0 0 8px;
+      color: #ff4f95;
+      font-size: 18px;
+      text-transform: lowercase;
+    }
+
+    .details p {
+      margin: 4px 0;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .label {
+      color: #ff3f8b;
+      font-weight: bold;
+    }
+
+    .mini-player {
+      margin-top: 14px;
+      background: #1c1c1c;
+      border: 1px solid #aaa;
+      height: 58px;
+      color: #eee;
+      font-size: 10px;
+      padding: 5px;
+      display: grid;
+      grid-template-columns: 1fr 70px;
+      gap: 6px;
+    }
+
+    .equalizer {
+      display: flex;
+      align-items: end;
+      gap: 3px;
+      height: 35px;
+    }
+
+    .equalizer span {
+      width: 7px;
+      background: #cfdbe8;
+      display: block;
+    }
+
+    .friends-grid,
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .friend,
+    .album {
+      height: 72px;
+      background: linear-gradient(135deg, #222, #62122e 55%, #d82d73);
+      border: 2px solid #222;
+      outline: 1px solid #ff6da5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .friend:nth-child(2n) { background: linear-gradient(135deg, #172230, #18506d, #e85896); }
+    .friend:nth-child(3n) { background: linear-gradient(135deg, #24142b, #854069, #f2b2ce); }
+    .album:nth-child(2n) { background: linear-gradient(135deg, #111, #777, #ff4d94); }
+
+    .friend::after,
+    .album::after {
+      content: "friend";
+      position: absolute;
+      left: 3px;
+      bottom: 3px;
+      color: white;
+      font-size: 8px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .album::after { content: "album"; }
+
+    .content {
+      padding: 10px 12px 14px;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .comment {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 9px;
+      padding: 9px 0;
+      border-bottom: 1px solid #66102f;
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(135deg, #111, #ff4f95);
+      border: 2px solid #ff77aa;
+    }
+
+    .small-photos {
+      display: flex;
+      gap: 14px;
+      padding: 12px;
+      min-height: 92px;
+    }
+
+    .thumb {
+      width: 70px;
+      height: 54px;
+      background: #111;
+      border: 3px solid #222;
+      outline: 1px solid #ff75a8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffc4da;
+      font-size: 9px;
+    }
+
+    .status {
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 8px;
+      font-size: 10px;
+    }
+
+    .status .pic {
+      height: 55px;
+      background: linear-gradient(135deg, #330014, #e44486);
+      border: 2px solid #111;
+      outline: 1px solid #ff86b4;
+    }
+
+    .ad {
+      height: 150px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.4), transparent 20%),
+        linear-gradient(135deg, #0d0d0d, #2b0920, #fb5a99);
+      border: 2px solid #ff7caf;
+      color: white;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      padding: 10px;
+      font-size: 24px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      margin-top: 10px;
+      height: 34px;
+      background: #050505;
+      border: 2px solid #ff5b9b;
+    }
+
+    @media (max-width: 780px) {
+      .page { width: 100%; }
+      .logo { font-size: 42px; }
+      .smiley { width: 42px; height: 42px; font-size: 25px; border-width: 3px; }
+      .main { grid-template-columns: 1fr; }
+      .profile-top { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <div class="top-strip"></div>
 
-<div class="container">
+    <header>
+      <div class="logo"><span class="smiley">☺</span>friendster</div>
+    </header>
 
-<div class="header">☺ friendster</div>
+    <div class="nav">
+      <div></div>
+      <div></div>
+    </div>
 
-<div class="marquee"><marquee>♥ welcome to my profile ♥ emo forever ♥ broken but beautiful ♥</marquee></div>
+    <main class="main">
+      <section>
+        <div class="box">
+          <div class="bar">profile</div>
+          <div class="profile-top">
+            <aside>
+              <div class="photo"></div>
+              <nav class="left-menu">
+                <a href="#">send message</a>
+                <a href="#">add as friend</a>
+                <a href="#">view photos</a>
+                <a href="#">forward profile</a>
+              </nav>
+            </aside>
 
-<div class="layout">
+            <div class="details">
+              <h1>pink star profile</h1>
+              <p><span class="label">status:</span> feeling nostalgic and online</p>
+              <p><span class="label">location:</span> internet cafe, 2004</p>
+              <p><span class="label">about me:</span> glitter layouts, tiny icons, handwritten quotes, and late-night testimonials.</p>
+              <p><span class="label">interests:</span> music players, profile comments, best friends, photo albums, guestbooks.</p>
+              <p><span class="label">favorite quote:</span> live fast, refresh often.</p>
 
-<div class="left">
+              <div class="mini-player">
+                <div>
+                  now playing: retro profile song<br />
+                  <div class="equalizer">
+                    <span style="height:16px"></span><span style="height:30px"></span><span style="height:23px"></span><span style="height:34px"></span><span style="height:20px"></span><span style="height:28px"></span>
+                  </div>
+                </div>
+                <div>▶ ❚❚ ■<br />00:42</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="box">
-<h3>Profile</h3>
-<div class="box-content">
-<img class="profile-pic" id="profilePreview" src="data:image/png;base64,REPLACE_BASE64">
-<br><br>
-<input type="file" id="profileUpload" accept="image/*">
-<br><br>
-<b>Name:</b> Iszia Pamintuan<br>
-<b>Status:</b> Single 💔<br>
-<b>Location:</b> Philippines<br>
-</div>
-</div>
+        <div class="box">
+          <div class="bar">photos</div>
+          <div class="small-photos">
+            <div class="thumb">photo</div>
+            <div class="thumb">photo</div>
+          </div>
+        </div>
 
-<div class="box">
-<h3>About Me</h3>
-<div class="box-content">
-"I cry in silence, I smile in public."<br><br>
-Music is my escape. Reality hurts.
-</div>
-</div>
+        <div class="box">
+          <div class="bar">about me</div>
+          <div class="content">
+            Welcome to my Friendster-inspired profile. This layout recreates the hot-pink, black-panel, table-style feel of early social media pages with chunky borders, compact text, and little profile modules.
+          </div>
+        </div>
 
-<div class="box">
-<h3>Testimonials</h3>
-<div class="box-content">
-<b>Ana:</b> She's soft but strong 💔<br>
-<b>Josh:</b> Always emo but cool 😎
-</div>
-</div>
+        <div class="box">
+          <div class="bar">testimonials</div>
+          <div class="content">
+            <div class="comment">
+              <div class="avatar"></div>
+              <p><span class="label">mika:</span> this page is so cute! love the pink theme and the music player.</p>
+            </div>
+            <div class="comment">
+              <div class="avatar"></div>
+              <p><span class="label">jay:</span> thanks for the add. your layout brings back memories.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-</div>
+      <aside>
+        <div class="box">
+          <div class="bar">friends</div>
+          <div class="friends-grid">
+            <div class="friend"></div>
+            <div class="friend"></div>
+            <div class="friend"></div>
+            <div class="friend"></div>
+            <div class="friend"></div>
+            <div class="friend"></div>
+          </div>
+        </div>
 
-<div class="right">
+        <div class="box">
+          <div class="bar">albums</div>
+          <div class="album-grid">
+            <div class="album"></div>
+            <div class="album"></div>
+            <div class="album"></div>
+            <div class="album"></div>
+            <div class="album"></div>
+            <div class="album"></div>
+          </div>
+        </div>
 
-<div class="box">
-<h3>Top Friends</h3>
-<div class="box-content friend-grid">
-<img src="https://i.pravatar.cc/80?img=1">
-<img src="https://i.pravatar.cc/80?img=2">
-<img src="https://i.pravatar.cc/80?img=3">
-<img src="https://i.pravatar.cc/80?img=4">
-<img src="https://i.pravatar.cc/80?img=5">
-<img src="https://i.pravatar.cc/80?img=6">
-</div>
-</div>
+        <div class="box">
+          <div class="bar">bulletin</div>
+          <div class="status">
+            <div class="pic"></div>
+            <p><span class="label">new post:</span><br />custom profile codes, icons, and glitter headers uploaded today.</p>
+          </div>
+        </div>
 
-<div class="box">
-<h3>Favorite Music</h3>
-<div class="box-content">
-My Chemical Romance<br>
-Paramore<br>
-Fall Out Boy<br>
+        <div class="ad">scene</div>
+      </aside>
+    </main>
 
-<br>
-<audio controls autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-document.getElementById('profileUpload').addEventListener('change', function(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('profilePreview').src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-});
-</script>
+    <footer></footer>
+  </div>
 </body>
 </html>
