@@ -192,32 +192,41 @@
       font-weight: bold;
     }
 
-    .mini-player {
-      margin-top: 14px;
-      background: #1c1c1c;
-      border: 1px solid #aaa;
-      color: #eee;
-      font-size: 10px;
-      padding: 6px;
-      display: grid;
-      grid-template-columns: 1fr 80px;
-      gap: 6px;
-      min-height: 62px;
-    }
+   .mini-player {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  min-height: 62px;
+  background: #1c1c1c;
+  border: 1px solid #aaa;
+  color: #eee;
+  font-size: 10px;
+  margin-top: 14px;
+}
 
-    .equalizer {
-      display: flex;
-      align-items: end;
-      gap: 3px;
-      height: 35px;
-      margin-top: 3px;
-    }
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1; /* allows left section to take remaining space without breaking layout */
+}
 
-    .equalizer span {
-      width: 7px;
-      background: #cfdbe8;
-      display: block;
-    }
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 35px;
+  overflow: hidden;
+}
+
+.equalizer span {
+  width: 7px;
+  background: linear-gradient(to top, #ff77aa, #ffccd5);
+  display: block;
+  border-radius: 2px;
+}
 
     .player-controls {
       display: flex;
@@ -441,30 +450,29 @@
               <p><span class="label">interests:</span> music players, profile comments, best friends, photo albums, guestbooks.</p>
               <p><span class="label">favorite quote:</span> live fast, refresh often.</p>
 
-              <div class="mini-player">
-                <div>
-                  now playing: Iszia's profile song<br />
+           <div class="mini-player">
+  <div class="player-info">
+    now playing: Iszia's profile song<br />
+    <div class="equalizer">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
-                  <div class="equalizer">
-                    <span style="height:16px"></span>
-                    <span style="height:30px"></span>
-                    <span style="height:23px"></span>
-                    <span style="height:34px"></span>
-                    <span style="height:20px"></span>
-                    <span style="height:28px"></span>
-                  </div>
-                </div>
+  <div class="player-controls">
+    <button type="button" onclick="playProfileSong()">▶</button>
+    <button type="button" onclick="pauseProfileSong()">❚❚</button>
+    <span>00:42</span>
+  </div>
 
-                <div class="player-controls">
-                  <button type="button" onclick="playProfileSong()">▶</button>
-                  <button type="button" onclick="pauseProfileSong()">❚❚</button>
-                  <span>00:42</span>
-                </div>
-
-                <audio id="profileSong" loop>
-                  <source src="song.mp3" type="audio/mpeg">
-                </audio>
-              </div>
+  <audio id="profileSong" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+</div>
             </div>
           </div>
         </div>
@@ -593,15 +601,44 @@
   </div>
 
   <script>
-    const profileSong = document.getElementById("profileSong");
+   const profileSong = document.getElementById("profileSong");
+const equalizerBars = document.querySelectorAll(".equalizer span");
 
-    function playProfileSong() {
-      profileSong.play();
-    }
+let audioCtx, analyser, dataArray;
 
-    function pauseProfileSong() {
-      profileSong.pause();
-    }
+function startEqualizer() {
+  if (!audioCtx) {
+    audioCtx = new AudioContext();
+    const source = audioCtx.createMediaElementSource(profileSong);
+    analyser = audioCtx.createAnalyser();
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    analyser.fftSize = 32;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+    animateBars();
+  }
+}
+
+function animateBars() {
+  requestAnimationFrame(animateBars);
+  analyser.getByteFrequencyData(dataArray);
+
+  equalizerBars.forEach((bar, i) => {
+    const height = Math.max(dataArray[i] / 2, 4); // minimum height 4px
+    bar.style.height = `${height}px`;
+  });
+}
+
+function playProfileSong() {
+  profileSong.play();
+  startEqualizer();
+}
+
+function pauseProfileSong() {
+  profileSong.pause();
+}
   </script>
 </body>
 </html>
