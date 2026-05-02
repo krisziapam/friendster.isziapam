@@ -193,25 +193,26 @@
     }
 
     .mini-player {
-      margin-top: 14px;
-      background: #1c1c1c;
-      border: 1px solid #aaa;
-      color: #eee;
-      font-size: 10px;
-      padding: 6px;
-      display: grid;
-      grid-template-columns: 1fr 80px;
-      gap: 6px;
-      min-height: 62px;
-    }
+  display: flex;                 /* horizontal layout */
+  justify-content: space-between; /* space between left & right sections */
+  align-items: center;           /* vertical alignment */
+  gap: 6px;
+  padding: 6px;
+  min-height: 62px;
+  background: #1c1c1c;
+  border: 1px solid #aaa;
+  color: #eee;
+  font-size: 10px;
+}
 
-    .equalizer {
-      display: flex;
-      align-items: end;
-      gap: 3px;
-      height: 35px;
-      margin-top: 3px;
-    }
+  .equalizer {
+  display: flex;          /* align bars horizontally */
+  align-items: flex-end;  /* bars grow from bottom */
+  gap: 3px;               /* space between bars */
+  height: 35px;           /* maximum bar height */
+  overflow: hidden;       /* prevent bars from overflowing the box */
+  margin-top: 6px;        /* spacing from text above */
+}
 
    .equalizer span {
   width: 7px;
@@ -442,25 +443,25 @@
               <p><span class="label">interests:</span> music players, profile comments, best friends, photo albums, guestbooks.</p>
               <p><span class="label">favorite quote:</span> live fast, refresh often.</p>
 
-              <div class="mini-player">
-                <div>
-                  now playing: Iszia's profile song<br />
+           <div class="mini-player">
+  <div class="player-info">
+    now playing: Iszia's profile song<br />
+    <div class="equalizer">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
-                  <div class="equalizer">
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
+  <div class="player-controls">
+    <button type="button" onclick="playProfileSong()">▶</button>
+    <button type="button" onclick="pauseProfileSong()">❚❚</button>
+    <span>00:42</span>
+  </div>
 </div>
-                </div>
-
-                <div class="player-controls">
-                  <button type="button" onclick="playProfileSong()">▶</button>
-                  <button type="button" onclick="pauseProfileSong()">❚❚</button>
-                  <span>00:42</span>
-                </div>
 
                 <audio id="profileSong" loop>
                   <source src="song.mp3" type="audio/mpeg">
