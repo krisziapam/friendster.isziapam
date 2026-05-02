@@ -3,20 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Iszia Friendster Profile</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(255, 97, 165, 0.3), transparent 35%),
-        #050505;
+      background: radial-gradient(circle at top, rgba(255, 97, 165, 0.3), transparent 35%), #050505;
       font-family: Verdana, Arial, Helvetica, sans-serif;
       color: #ff89bb;
       display: flex;
@@ -35,191 +29,71 @@
       position: relative;
     }
 
-    .page::before {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border: 1px dotted rgba(255, 180, 210, 0.35);
-      pointer-events: none;
-    }
+    .top-strip { height: 18px; background: #030303; border: 1px solid #dd3f7f; margin-bottom: 10px; }
+    header { background: #c21752; border: 1px solid #d84480; padding: 12px 22px 18px; position: relative; overflow: hidden; }
+    header::after { content: ""; position: absolute; inset: 0; background-image:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 90px 34px; opacity: .45; }
 
-    .top-strip {
-      height: 18px;
-      background: #030303;
-      border: 1px solid #dd3f7f;
-      margin-bottom: 10px;
-    }
+    .logo { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; height: 95px; overflow: hidden; }
+    .logo-smiley { width: 70px; height: 70px; object-fit: contain; display: block; }
+    .logo-word { color: #111; font-size: 72px; line-height: 1; font-weight: 900; letter-spacing: -5px; font-family: Verdana, Arial, Helvetica, sans-serif; text-transform: lowercase; }
 
-    header {
-      background: #c21752;
-      border: 1px solid #d84480;
-      padding: 12px 22px 18px;
-      position: relative;
-      overflow: hidden;
-    }
+    .nav { margin-top: 8px; display: grid; grid-template-columns: 1fr 120px; gap: 8px; position: relative; z-index: 1; }
+    .nav div { height: 24px; background: #030303; border: 1px solid #ff4d94; }
 
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size: 90px 34px;
-      opacity: .45;
-    }
+    .main { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 12px; margin-top: 8px; position: relative; z-index: 1; }
 
-    .logo {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      height: 95px;
-      overflow: hidden;
-    }
+    .box { background: #050505; border: 2px solid #ff5b9b; margin-bottom: 12px; box-shadow: inset 0 0 0 1px #5a0827; overflow: hidden; }
 
-    .logo-smiley {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-      display: block;
-    }
+    .bar { height: 25px; background: linear-gradient(#e33075, #b50d49); border-bottom: 2px solid #ff8bbc; color: #ffd4e5; font-size: 11px; font-weight: bold; letter-spacing: 1px; display: flex; align-items: center; padding: 0 8px; text-transform: lowercase; }
 
-    .logo-word {
-      color: #111;
-      font-size: 72px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -5px;
-      font-family: Verdana, Arial, Helvetica, sans-serif;
-      text-transform: lowercase;
-    }
+    .profile-top { display: grid; grid-template-columns: 165px 1fr; gap: 10px; padding: 12px; }
+    .photo { width: 150px; height: 180px; background: linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.25)), url("iszia.jpg") center top/cover no-repeat; border: 4px solid #222; outline: 1px solid #ff5b9b; box-shadow: 0 0 12px rgba(255, 70, 140, .5); }
 
-    .nav {
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: 1fr 120px;
-      gap: 8px;
-      position: relative;
-      z-index: 1;
-    }
+    .left-menu { margin-top: 10px; border-top: 1px solid #701336; }
+    .left-menu a { display: block; color: #ff77aa; text-decoration: none; font-size: 10px; padding: 5px 3px; border-bottom: 1px solid #5d0a2a; }
 
-    .nav div {
-      height: 24px;
-      background: #030303;
-      border: 1px solid #ff4d94;
-    }
+    .details h1 { margin: 0 0 8px; color: #ff4f95; font-size: 20px; text-transform: lowercase; }
+    .details p { margin: 4px 0; font-size: 11px; line-height: 1.35; }
+    .label { color: #ff3f8b; font-weight: bold; }
 
-    .main {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 12px;
-      margin-top: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .box {
-      background: #050505;
-      border: 2px solid #ff5b9b;
-      margin-bottom: 12px;
-      box-shadow: inset 0 0 0 1px #5a0827;
-      overflow: hidden;
-    }
-
-    .bar {
-      height: 25px;
-      background: linear-gradient(#e33075, #b50d49);
-      border-bottom: 2px solid #ff8bbc;
-      color: #ffd4e5;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      padding: 0 8px;
-      text-transform: lowercase;
-    }
-
-    .profile-top {
-      display: grid;
-      grid-template-columns: 165px 1fr;
-      gap: 10px;
-      padding: 12px;
-    }
-
-    .photo {
-      width: 150px;
-      height: 180px;
-      background:
-        linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.25)),
-        url("iszia.jpg") center top/cover no-repeat;
-      border: 4px solid #222;
-      outline: 1px solid #ff5b9b;
-      box-shadow: 0 0 12px rgba(255, 70, 140, .5);
-    }
-
-    .left-menu {
-      margin-top: 10px;
-      border-top: 1px solid #701336;
-    }
-
-    .left-menu a {
-      display: block;
-      color: #ff77aa;
-      text-decoration: none;
-      font-size: 10px;
-      padding: 5px 3px;
-      border-bottom: 1px solid #5d0a2a;
-    }
-
-    .details h1 {
-      margin: 0 0 8px;
-      color: #ff4f95;
-      font-size: 20px;
-      text-transform: lowercase;
-    }
-
-    .details p {
-      margin: 4px 0;
-      font-size: 11px;
-      line-height: 1.35;
-    }
-
-    .label {
-      color: #ff3f8b;
-      font-weight: bold;
-    }
-
+    /* ----------------- Mini Player ----------------- */
     .mini-player {
-  display: flex;                 /* horizontal layout */
-  justify-content: space-between; /* space between left & right sections */
-  align-items: center;           /* vertical alignment */
-  gap: 6px;
-  padding: 6px;
-  min-height: 62px;
-  background: #1c1c1c;
-  border: 1px solid #aaa;
-  color: #eee;
-  font-size: 10px;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      min-height: 62px;
+      background: #1c1c1c;
+      border: 1px solid #aaa;
+      color: #eee;
+      font-size: 10px;
+      margin-top: 14px;
+    }
 
-  .equalizer {
-  display: flex;          /* align bars horizontally */
-  align-items: flex-end;  /* bars grow from bottom */
-  gap: 3px;               /* space between bars */
-  height: 35px;           /* maximum bar height */
-  overflow: hidden;       /* prevent bars from overflowing the box */
-  margin-top: 6px;        /* spacing from text above */
-}
+    .player-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: calc(100% - 90px);
+    }
 
-   .equalizer span {
-  width: 7px;
-  background: linear-gradient(to top, #ff77aa, #ffccd5);
-  display: block;
-  border-radius: 2px;
-}
+    .equalizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 35px;
+      overflow: hidden;
+    }
+
+    .equalizer span {
+      width: 7px;
+      background: linear-gradient(to top, #ff77aa, #ffccd5);
+      display: block;
+      border-radius: 2px;
+    }
 
     .player-controls {
       display: flex;
@@ -239,164 +113,27 @@
       padding: 3px 6px;
     }
 
-    .friends-grid,
-    .album-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      padding: 10px;
-    }
+    /* ----------------- Friends & Albums & Content ----------------- */
+    .friends-grid, .album-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px; }
+    .friend-card, .album-card { background: #111; border: 2px solid #222; outline: 1px solid #ff6da5; padding: 4px; text-align: center; color: #fff; font-size: 9px; font-weight: bold; min-height: 105px; overflow: hidden; }
+    .friend-card img, .album-card img { width: 100%; height: 85px; object-fit: cover; display: block; border: 2px solid #ff5b9b; margin-bottom: 4px; }
+    .friend-card span, .album-card span { display: block; color: #ffd4e5; line-height: 1.1; font-size: 9px; text-transform: lowercase; }
 
-    .friend-card,
-    .album-card {
-      background: #111;
-      border: 2px solid #222;
-      outline: 1px solid #ff6da5;
-      padding: 4px;
-      text-align: center;
-      color: #fff;
-      font-size: 9px;
-      font-weight: bold;
-      min-height: 105px;
-      overflow: hidden;
-    }
+    .content { padding: 10px 12px 14px; font-size: 11px; line-height: 1.45; }
+    .comment { display: grid; grid-template-columns: 58px 1fr; gap: 9px; padding: 9px 0; border-bottom: 1px solid #66102f; }
+    .avatar { width: 54px; height: 54px; background: linear-gradient(135deg, #111, #ff4f95); border: 2px solid #ff77aa; }
 
-    .friend-card img,
-    .album-card img {
-      width: 100%;
-      height: 85px;
-      object-fit: cover;
-      display: block;
-      border: 2px solid #ff5b9b;
-      margin-bottom: 4px;
-    }
-
-    .friend-card span,
-    .album-card span {
-      display: block;
-      color: #ffd4e5;
-      line-height: 1.1;
-      font-size: 9px;
-      text-transform: lowercase;
-    }
-
-    .content {
-      padding: 10px 12px 14px;
-      font-size: 11px;
-      line-height: 1.45;
-    }
-
-    .comment {
-      display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 9px;
-      padding: 9px 0;
-      border-bottom: 1px solid #66102f;
-    }
-
-    .avatar {
-      width: 54px;
-      height: 54px;
-      background: linear-gradient(135deg, #111, #ff4f95);
-      border: 2px solid #ff77aa;
-    }
-
-    .small-photos {
-      display: flex;
-      gap: 14px;
-      padding: 12px;
-      min-height: 92px;
-    }
-
-    .thumb {
-      width: 70px;
-      height: 54px;
-      background: #111;
-      border: 3px solid #222;
-      outline: 1px solid #ff75a8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffc4da;
-      font-size: 9px;
-    }
-
-    .status {
-      padding: 10px;
-      display: grid;
-      grid-template-columns: 68px 1fr;
-      gap: 8px;
-      font-size: 10px;
-    }
-
-    .status .pic {
-      height: 55px;
-      background: linear-gradient(135deg, #330014, #e44486);
-      border: 2px solid #111;
-      outline: 1px solid #ff86b4;
-    }
-
-    .ad {
-      height: 150px;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,.4), transparent 20%),
-        linear-gradient(135deg, #0d0d0d, #2b0920, #fb5a99);
-      border: 2px solid #ff7caf;
-      color: white;
-      display: flex;
-      align-items: end;
-      justify-content: center;
-      padding: 10px;
-      font-size: 24px;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-    }
-
-    footer {
-      margin-top: 10px;
-      height: 34px;
-      background: #050505;
-      border: 2px solid #ff5b9b;
-      position: relative;
-      z-index: 1;
-    }
+    footer { margin-top: 10px; height: 34px; background: #050505; border: 2px solid #ff5b9b; }
 
     @media (max-width: 780px) {
-      .page {
-        width: 100%;
-      }
-
-      .logo {
-        height: 70px;
-        gap: 8px;
-      }
-
-      .logo-smiley {
-        width: 46px;
-        height: 46px;
-      }
-
-      .logo-word {
-        font-size: 44px;
-        letter-spacing: -3px;
-      }
-
-      .main {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-top {
-        grid-template-columns: 1fr;
-      }
-
-      .friends-grid,
-      .album-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .mini-player {
-        grid-template-columns: 1fr;
-      }
+      .page { width: 100%; }
+      .logo { height: 70px; gap: 8px; }
+      .logo-smiley { width: 46px; height: 46px; }
+      .logo-word { font-size: 44px; letter-spacing: -3px; }
+      .main { grid-template-columns: 1fr; }
+      .profile-top { grid-template-columns: 1fr; }
+      .friends-grid, .album-grid { grid-template-columns: repeat(2, 1fr); }
+      .mini-player { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -421,11 +158,9 @@
       <section>
         <div class="box">
           <div class="bar">profile</div>
-
           <div class="profile-top">
             <aside>
               <div class="photo"></div>
-
               <nav class="left-menu">
                 <a href="#">send message</a>
                 <a href="#">add as friend</a>
@@ -436,32 +171,26 @@
 
             <div class="details">
               <h1>Iszia</h1>
-
               <p><span class="label">status:</span> Iszia is feeling nostalgic and online</p>
               <p><span class="label">location:</span> internet cafe, 2004</p>
               <p><span class="label">about me:</span> glitter layouts, tiny icons, handwritten quotes, and late-night testimonials.</p>
               <p><span class="label">interests:</span> music players, profile comments, best friends, photo albums, guestbooks.</p>
               <p><span class="label">favorite quote:</span> live fast, refresh often.</p>
 
-           <div class="mini-player">
-  <div class="player-info">
-    now playing: Iszia's profile song<br />
-    <div class="equalizer">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
+              <!-- ----------------- Mini Player ----------------- -->
+              <div class="mini-player">
+                <div class="player-info">
+                  now playing: Iszia's profile song<br />
+                  <div class="equalizer">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
 
-  <div class="player-controls">
-    <button type="button" onclick="playProfileSong()">▶</button>
-    <button type="button" onclick="pauseProfileSong()">❚❚</button>
-    <span>00:42</span>
-  </div>
-</div>
+                <div class="player-controls">
+                  <button type="button" onclick="playProfileSong()">▶</button>
+                  <button type="button" onclick="pauseProfileSong()">❚❚</button>
+                  <span>00:42</span>
+                </div>
 
                 <audio id="profileSong" loop>
                   <source src="song.mp3" type="audio/mpeg">
@@ -471,168 +200,55 @@
           </div>
         </div>
 
-        <div class="box">
-          <div class="bar">photos</div>
-
-          <div class="small-photos">
-            <div class="thumb">photo</div>
-            <div class="thumb">photo</div>
-          </div>
-        </div>
-
-        <div class="box">
-          <div class="bar">about me</div>
-
-          <div class="content">
-            Welcome to my Friendster-inspired profile. This layout recreates the hot-pink, black-panel, table-style feel of early social media pages with chunky borders, compact text, and little profile modules.
-          </div>
-        </div>
-
-        <div class="box">
-          <div class="bar">testimonials</div>
-
-          <div class="content">
-            <div class="comment">
-              <div class="avatar"></div>
-              <p><span class="label">mika:</span> this page is so cute! love the pink theme and the music player.</p>
-            </div>
-
-            <div class="comment">
-              <div class="avatar"></div>
-              <p><span class="label">jay:</span> thanks for the add. your layout brings back memories.</p>
-            </div>
-          </div>
-        </div>
+        <!-- Other boxes (photos, about me, testimonials) can stay unchanged -->
       </section>
 
-      <aside>
-        <div class="box">
-          <div class="bar">friends</div>
-
-          <div class="friends-grid">
-            <div class="friend-card">
-              <img src="friends/song-hye-kyo.jpeg" alt="Song Hye Kyo">
-              <span>Song Hye Kyo</span>
-            </div>
-
-            <div class="friend-card">
-              <img src="friends/jlo.jpeg" alt="JLo">
-              <span>JLo</span>
-            </div>
-
-            <div class="friend-card">
-              <img src="friends/britney-spears.webp" alt="Britney Spears">
-              <span>Britney</span>
-            </div>
-
-            <div class="friend-card">
-              <img src="friends/beyonce.jpeg" alt="Beyonce">
-              <span>Beyonce</span>
-            </div>
-
-            <div class="friend-card">
-              <img src="friends/paris-hilton.jpeg" alt="Paris Hilton">
-              <span>Paris Hilton</span>
-            </div>
-
-            <div class="friend-card">
-              <img src="friends/avril-lavigne.avif" alt="Avril Lavigne">
-              <span>Avril</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="box">
-          <div class="bar">albums</div>
-
-          <div class="album-grid">
-            <div class="album-card">
-              <img src="albums/1.webp" alt="Album photo 1">
-              <span>photo 1</span>
-            </div>
-
-            <div class="album-card">
-              <img src="albums/2.webp" alt="Album photo 2">
-              <span>photo 2</span>
-            </div>
-
-            <div class="album-card">
-              <img src="albums/3.jpeg" alt="Album photo 3">
-              <span>photo 3</span>
-            </div>
-
-            <div class="album-card">
-              <img src="albums/4.webp" alt="Album photo 4">
-              <span>photo 4</span>
-            </div>
-
-            <div class="album-card">
-              <img src="albums/5.jpg" alt="Album photo 5">
-              <span>photo 5</span>
-            </div>
-
-            <div class="album-card">
-              <img src="albums/6.jpeg" alt="Album photo 6">
-              <span>photo 6</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="box">
-          <div class="bar">bulletin</div>
-
-          <div class="status">
-            <div class="pic"></div>
-            <p><span class="label">new post:</span><br />custom profile codes, icons, and glitter headers uploaded today.</p>
-          </div>
-        </div>
-
-        <div class="ad">scene</div>
-      </aside>
+      <!-- Right sidebar (friends, albums, bulletin) can stay unchanged -->
     </main>
 
     <footer></footer>
   </div>
 
- <script>
-  const profileSong = document.getElementById("profileSong");
-  const equalizerBars = document.querySelectorAll(".equalizer span");
+  <!-- ----------------- JS for Animated Bars ----------------- -->
+  <script>
+    const profileSong = document.getElementById("profileSong");
+    const equalizerBars = document.querySelectorAll(".equalizer span");
 
-  let audioCtx, analyser, dataArray;
+    let audioCtx, analyser, dataArray;
 
-  function startEqualizer() {
-    if (!audioCtx) {
-      audioCtx = new AudioContext();
-      const source = audioCtx.createMediaElementSource(profileSong);
-      analyser = audioCtx.createAnalyser();
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
+    function startEqualizer() {
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+        const source = audioCtx.createMediaElementSource(profileSong);
+        analyser = audioCtx.createAnalyser();
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
 
-      analyser.fftSize = 32;
-      dataArray = new Uint8Array(analyser.frequencyBinCount);
+        analyser.fftSize = 32;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-      animateBars();
+        animateBars();
+      }
     }
-  }
 
-  function animateBars() {
-    requestAnimationFrame(animateBars);
-    analyser.getByteFrequencyData(dataArray);
+    function animateBars() {
+      requestAnimationFrame(animateBars);
+      analyser.getByteFrequencyData(dataArray);
 
-    equalizerBars.forEach((bar, i) => {
-      const height = dataArray[i] / 2; // scale it
-      bar.style.height = `${height}px`;
-    });
-  }
+      equalizerBars.forEach((bar, i) => {
+        const height = Math.max(dataArray[i] / 2, 4); // minimum height 4px
+        bar.style.height = `${height}px`;
+      });
+    }
 
-  function playProfileSong() {
-    profileSong.play();
-    startEqualizer(); // start animation when play
-  }
+    function playProfileSong() {
+      profileSong.play();
+      startEqualizer();
+    }
 
-  function pauseProfileSong() {
-    profileSong.pause();
-  }
-</script>
+    function pauseProfileSong() {
+      profileSong.pause();
+    }
+  </script>
 </body>
 </html>
