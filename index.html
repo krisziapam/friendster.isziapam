@@ -446,13 +446,13 @@
                   now playing: Iszia's profile song<br />
 
                   <div class="equalizer">
-                    <span style="height:16px"></span>
-                    <span style="height:30px"></span>
-                    <span style="height:23px"></span>
-                    <span style="height:34px"></span>
-                    <span style="height:20px"></span>
-                    <span style="height:28px"></span>
-                  </div>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
                 </div>
 
                 <div class="player-controls">
@@ -592,16 +592,45 @@
     <footer></footer>
   </div>
 
-  <script>
-    const profileSong = document.getElementById("profileSong");
+ <script>
+  const profileSong = document.getElementById("profileSong");
+  const equalizerBars = document.querySelectorAll(".equalizer span");
 
-    function playProfileSong() {
-      profileSong.play();
-    }
+  let audioCtx, analyser, dataArray;
 
-    function pauseProfileSong() {
-      profileSong.pause();
+  function startEqualizer() {
+    if (!audioCtx) {
+      audioCtx = new AudioContext();
+      const source = audioCtx.createMediaElementSource(profileSong);
+      analyser = audioCtx.createAnalyser();
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      analyser.fftSize = 32;
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+      animateBars();
     }
-  </script>
+  }
+
+  function animateBars() {
+    requestAnimationFrame(animateBars);
+    analyser.getByteFrequencyData(dataArray);
+
+    equalizerBars.forEach((bar, i) => {
+      const height = dataArray[i] / 2; // scale it
+      bar.style.height = `${height}px`;
+    });
+  }
+
+  function playProfileSong() {
+    profileSong.play();
+    startEqualizer(); // start animation when play
+  }
+
+  function pauseProfileSong() {
+    profileSong.pause();
+  }
+</script>
 </body>
 </html>
